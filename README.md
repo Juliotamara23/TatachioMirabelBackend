@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/STATUS-EN%20DESARROLLO-green">
 </p>
 
-<h1 align="center">Solución Backend para Patientor</h1>
+<h1 align="center">Backend para Tatachio Mirabel</h1>
 
 ## Descripción del ejercicio
 
