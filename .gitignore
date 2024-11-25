@@ -1,5 +1,5 @@
 # Data
-data\data.json
+data/
 
 # Node.js
 node_modules/
