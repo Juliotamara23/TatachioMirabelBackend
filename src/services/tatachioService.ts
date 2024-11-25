@@ -27,6 +27,11 @@ const getNonSensitiveEntries = (): NonSensitiveMemberEntry[] => {
     }));
 }
 
+const findbyId = (id: number): MemberEntry | undefined => {
+    const entry = members.find(member => member.NUMERO_DOCUMENTO === id);
+    return entry;
+}
+
 const addEntry = () => {
     return null;
 }
@@ -34,5 +39,6 @@ const addEntry = () => {
 export default {
     getEntries,
     addEntry,
-    getNonSensitiveEntries
+    getNonSensitiveEntries,
+    findbyId
 }
