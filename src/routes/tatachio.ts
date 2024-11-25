@@ -8,7 +8,26 @@ router.get("/", (_req, res) => {
 });
 
 router.post("/", (_req, res) => {
-  res.send("saving tatachioDB");
+  const { RESGUARDO_INDIGENA, COMUNIDAD_INDIGENA, FAMILIA, TIPO_IDENTIFICACION, NOMBRE, APELLIDOS, FECHA_NACIMIENTO, PARENTESCO, SEXO, ESTADO_CIVIL, PROFESION, ESCOLARIDAD, INTEGRANTES, DIRECCION, TELEFONO, USUARIO } = _req.body;
+  const addedEntry = tatachioService.addEntry({
+    RESGUARDO_INDIGENA,
+    COMUNIDAD_INDIGENA,
+    FAMILIA,
+    TIPO_IDENTIFICACION,
+    NOMBRE,
+    APELLIDOS,
+    FECHA_NACIMIENTO,
+    PARENTESCO,
+    SEXO,
+    ESTADO_CIVIL,
+    PROFESION,
+    ESCOLARIDAD,
+    INTEGRANTES,
+    DIRECCION,
+    TELEFONO,
+    USUARIO,
+  });
+  res.json(addedEntry);
 });
 
 router.get("/:id", (req, res) => {

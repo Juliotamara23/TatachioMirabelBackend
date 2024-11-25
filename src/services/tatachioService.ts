@@ -1,5 +1,5 @@
 import tatachioData from "../../data/members";
-import { MemberEntry, NonSensitiveMemberEntry } from "../types";
+import { MemberEntry, NonSensitiveMemberEntry,  NewMemberEntry } from "../types";
 const members: MemberEntry[] = tatachioData as MemberEntry[];
 
 const getEntries = (): MemberEntry[] => {
@@ -32,9 +32,17 @@ const findbyId = (id: number): MemberEntry | undefined => {
     return entry;
 }
 
-const addEntry = () => {
-    return null;
+const addEntry = (entry: NewMemberEntry): MemberEntry => {
+    
+    const newMemberEntry = {
+        NUMERO_DOCUMENTO: Math.max(...members.map(member => member.NUMERO_DOCUMENTO)) + 1,
+        ...entry
+    }
+
+    members.push(newMemberEntry);
+    return newMemberEntry;
 }
+
 
 export default {
     getEntries,

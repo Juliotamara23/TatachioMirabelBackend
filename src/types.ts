@@ -25,3 +25,4 @@ export interface MemberEntry {
 }
 
 export type NonSensitiveMemberEntry = Omit<MemberEntry, 'TELEFONO'>;
+export type NewMemberEntry = Omit<MemberEntry, 'NUMERO_DOCUMENTO'>;
