@@ -1,5 +1,6 @@
 import express from "express";
 import tatachioService from "../services/tatachioService";
+import toNewMemberEntry from "../utils";
 
 const router = express.Router();
 
@@ -8,27 +9,19 @@ router.get("/", (_req, res) => {
 });
 
 router.post("/", (_req, res) => {
-  const { RESGUARDO_INDIGENA, COMUNIDAD_INDIGENA, FAMILIA, TIPO_IDENTIFICACION, NOMBRE, APELLIDOS, FECHA_NACIMIENTO, PARENTESCO, SEXO, ESTADO_CIVIL, PROFESION, ESCOLARIDAD, INTEGRANTES, DIRECCION, TELEFONO, USUARIO } = _req.body;
-  const addedEntry = tatachioService.addEntry({
-    RESGUARDO_INDIGENA,
-    COMUNIDAD_INDIGENA,
-    FAMILIA,
-    TIPO_IDENTIFICACION,
-    NOMBRE,
-    APELLIDOS,
-    FECHA_NACIMIENTO,
-    PARENTESCO,
-    SEXO,
-    ESTADO_CIVIL,
-    PROFESION,
-    ESCOLARIDAD,
-    INTEGRANTES,
-    DIRECCION,
-    TELEFONO,
-    USUARIO,
-  });
-  res.json(addedEntry);
+  try {
+    const newMemberEntry = toNewMemberEntry(_req.body);
+    const addedEntry = tatachioService.addMember(newMemberEntry);
+    res.json(addedEntry);
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
+  }
 });
+
 
 router.get("/:id", (req, res) => {
   const member = tatachioService.findbyId(Number(req.params.id));
