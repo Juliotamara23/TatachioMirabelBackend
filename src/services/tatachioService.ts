@@ -32,7 +32,7 @@ const findbyId = (id: number): MemberEntry | undefined => {
     return entry;
 }
 
-const addEntry = (entry: NewMemberEntry): MemberEntry => {
+const addMember = (entry: NewMemberEntry): MemberEntry => {
     
     const newMemberEntry = {
         NUMERO_DOCUMENTO: Math.max(...members.map(member => member.NUMERO_DOCUMENTO)) + 1,
@@ -46,7 +46,7 @@ const addEntry = (entry: NewMemberEntry): MemberEntry => {
 
 export default {
     getEntries,
-    addEntry,
+    addMember,
     getNonSensitiveEntries,
     findbyId
 }
