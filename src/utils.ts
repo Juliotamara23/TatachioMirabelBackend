@@ -178,38 +178,56 @@ const parseTelefono = (TELEFONO: unknown): number => {
 
 const parseUsuario = (USUARIO: unknown): string => {
   if (!USUARIO || !isString(USUARIO)) {
-    throw new Error("Incorrect o missing USUARIO")
+    throw new Error("Incorrect o missing USUARIO");
   }
-  return USUARIO
+  return USUARIO;
 };
 
 const toNewMemberEntry = (object: unknown): NewMemberEntry => {
-    if (!object || typeof object !== "object") {
-        throw new Error("Incorrect o missing data");
-    }
+  if (!object || typeof object !== "object") {
+    throw new Error("Incorrect o missing data");
+  }
 
-    if ('RESGUARDO_INDIGENA' in object && 'COMUNIDAD_INDIGENA' in object && 'FAMILIA' in object && 'TIPO_IDENTIFICACION' in object && 'NUMERO_DOCUMENTO' in object && 'NOMBRE' in object && 'APELLIDOS' in object && 'FECHA_NACIMIENTO' in object && 'PARENTESCO' in object && 'SEXO' in object && 'ESTADO_CIVIL' in object && 'PROFESION' in object && 'ESCOLARIDAD' in object && 'INTEGRANTES' in object && 'DIRECCION' in object && 'TELEFONO' in object && 'USUARIO' in object) {
-        const newEntry: NewMemberEntry = {
-            RESGUARDO_INDIGENA: parseResguardo(object.RESGUARDO_INDIGENA),
-            COMUNIDAD_INDIGENA: parseComunidad(object.COMUNIDAD_INDIGENA),
-            FAMILIA: parseFamilia(object.FAMILIA),
-            TIPO_IDENTIFICACION: parseTipoDocumento(object.TIPO_IDENTIFICACION),
-            NUMERO_DOCUMENTO: parseNumeroDocumento(object.NUMERO_DOCUMENTO),
-            NOMBRE: parseNombre(object.NOMBRE),
-            APELLIDOS: parseApellidos(object.APELLIDOS),
-            FECHA_NACIMIENTO: parseFechaNacimiento(object.FECHA_NACIMIENTO),
-            PARENTESCO: parseParentesco(object.PARENTESCO),
-            SEXO: parseSexo(object.SEXO),
-            ESTADO_CIVIL: parseEstadoCivil(object.ESTADO_CIVIL),
-            PROFESION: parseProfesion(object.PROFESION),
-            ESCOLARIDAD: parseEscolaridad(object.ESCOLARIDAD),
-            INTEGRANTES: parseIntegrantes(object.INTEGRANTES),
-            DIRECCION: parseDireccion(object.DIRECCION),
-            TELEFONO: parseTelefono(object.TELEFONO),
-            USUARIO: parseUsuario(object.USUARIO)
-        }
-        return newEntry;
-    }
-    throw new Error("Incorrect data: Some fields are missing");
+  if (
+    "RESGUARDO_INDIGENA" in object &&
+    "COMUNIDAD_INDIGENA" in object &&
+    "FAMILIA" in object &&
+    "TIPO_IDENTIFICACION" in object &&
+    "NUMERO_DOCUMENTO" in object &&
+    "NOMBRE" in object &&
+    "APELLIDOS" in object &&
+    "FECHA_NACIMIENTO" in object &&
+    "PARENTESCO" in object &&
+    "SEXO" in object &&
+    "ESTADO_CIVIL" in object &&
+    "PROFESION" in object &&
+    "ESCOLARIDAD" in object &&
+    "INTEGRANTES" in object &&
+    "DIRECCION" in object &&
+    "TELEFONO" in object &&
+    "USUARIO" in object
+  ) {
+    const newEntry: NewMemberEntry = {
+      RESGUARDO_INDIGENA: parseResguardo(object.RESGUARDO_INDIGENA),
+      COMUNIDAD_INDIGENA: parseComunidad(object.COMUNIDAD_INDIGENA),
+      FAMILIA: parseFamilia(object.FAMILIA),
+      TIPO_IDENTIFICACION: parseTipoDocumento(object.TIPO_IDENTIFICACION),
+      // NUMERO_DOCUMENTO: parseNumeroDocumento(object.NUMERO_DOCUMENTO),
+      NOMBRE: parseNombre(object.NOMBRE),
+      APELLIDOS: parseApellidos(object.APELLIDOS),
+      FECHA_NACIMIENTO: parseFechaNacimiento(object.FECHA_NACIMIENTO),
+      PARENTESCO: parseParentesco(object.PARENTESCO),
+      SEXO: parseSexo(object.SEXO),
+      ESTADO_CIVIL: parseEstadoCivil(object.ESTADO_CIVIL),
+      PROFESION: parseProfesion(object.PROFESION),
+      ESCOLARIDAD: parseEscolaridad(object.ESCOLARIDAD),
+      INTEGRANTES: parseIntegrantes(object.INTEGRANTES),
+      DIRECCION: parseDireccion(object.DIRECCION),
+      TELEFONO: parseTelefono(object.TELEFONO),
+      USUARIO: parseUsuario(object.USUARIO),
+    };
+    return newEntry;
+  }
+  throw new Error("Incorrect data: Some fields are missing");
 };
 export default toNewMemberEntry;
