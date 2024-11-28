@@ -2,7 +2,7 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev src/index.ts",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint .",
     "start": "node build/index.js"
   },
   "author": {
@@ -20,5 +20,6 @@
   },
   "dependencies": {
     "express": "^4.21.1"
-  }
+  },
+  "type": "module"
 }
