@@ -6,7 +6,7 @@
 
 ## Descripción del ejercicio
 
-Este es el backend para el proyecto de Tatachio Mirabel, este tiene como operación principal la gestión de los miembros del cavildo, asi como la generacion de reportes en formatos usados por el gobierno de Colombia.
+Este es el backend para el proyecto de Tatachio Mirabel, este tiene como operación principal la gestión de los miembros del cabildo, asi como la generacion de reportes en formatos usados por el gobierno de Colombia.
 
 ### Tecnologías utilizadas
 - **TypeScript**
