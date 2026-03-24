@@ -1,5 +1,6 @@
 import express from "express";
-import tatachioRouter from "./routes/tatachio";
+import tatachioRouter from "./routes/tatachio.js";
+import authRouter from "./routes/auth.js";
 const app = express();
 app.use(express.json());
 
@@ -11,6 +12,7 @@ app.get("/test", (_req, res) => {
 });
 
 app.use("/api/tatachio", tatachioRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
