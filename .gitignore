@@ -34,14 +34,8 @@ coverage/
 
 # Data
 data/
-
-# Prisma
-prisma/*.db
-prisma/*.db-journal
 *.db
 *.db-journal
 
-# pnpm
-pnpm-workspace.yaml
-
+# Prisma
 /src/generated/prisma
