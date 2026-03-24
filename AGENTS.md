@@ -52,6 +52,8 @@ Follow conventional-commit style: `<type>[scope]: <description>`
 
 **Types:** `feat`, `fix`, `docs`, `chore`, `perf`, `refactor`, `style`, `test`
 
+**Importante:** Todas las instalaciones de dependencias deben realizarse con `pnpm`, no con `npm` ni `yarn`.
+
 Before creating a PR:
 1. Complete checklist in `.github/pull_request_template.md` (if exists)
 2. Run all relevant tests and linters
