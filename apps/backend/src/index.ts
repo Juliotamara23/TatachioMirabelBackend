@@ -1,6 +1,8 @@
+import "dotenv/config";
 import express from "express";
-import tatachioRouter from "./routes/tatachio.js";
 import authRouter from "./routes/auth.js";
+import memberRouter from "./routes/member.js";
+import analysisRouter from "./routes/analysis.js";
 const app = express();
 app.use(express.json());
 
@@ -11,8 +13,9 @@ app.get("/test", (_req, res) => {
   res.send("working");
 });
 
-app.use("/api/tatachio", tatachioRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/miembros", memberRouter);
+app.use("/api/analisis", analysisRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
