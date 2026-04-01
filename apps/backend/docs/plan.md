@@ -1,41 +1,37 @@
 # Plan de Evolución del Proyecto: Backend SaaS para Tatachio Mirabel
 
 ## Objetivos
-Desarrollar un backend robusto en formato SaaS para Tatachio Mirabel, facilitando la gestión de datos, análisis basados en LLM y reportes regulatorios.
+Desarrollar un backend robusto en formato SaaS para Tatachio Mirabel, facilitando la gestión de datos, análisis basados en LLM y reportes regulatorios oficiales del Ministerio del Interior de Colombia.
 
 ## 1. Arquitectura del Backend y Diseño de Base de Datos
-- **Stack Tecnológico**: Node.js/TypeScript con Prisma ORM (seleccionado por seguridad de tipos y facilidad de migración).
-- **Base de Datos**: PostgreSQL (Estructura relacional para consistencia de datos).
-- **Diseño del Esquema**:
+- **Stack Tecnológico**: Node.js/TypeScript con Prisma ORM.
+- **Base de Datos**: SQLite (Desarrollo/Prototipado) -> PostgreSQL (Producción SaaS).
+- **Estrategia de Identificación**: UUID v4 para todos los modelos (Seguridad y sincronización).
+- **Diseño del Esquema (Alineado con MinInterior)**:
   - `Usuario`: id, email, password_hash, rol (Administrador/Capitana).
-  - `Cabildo`: id, nombre, ubicación, metadatos.
-  - `DatosCensales`: id, cabildo_id, campos según formato MinInterior (nombres, documentos, fechas, etc.).
-  - `Reporte`: id, cabildo_id, tipo (Censo/Altas/Bajas), generado_en, estado.
+  - `Cabildo`: id, nombre, resguardo, comunidad, vigencia.
+  - `Miembro`: id, cabildo_id, campos según formato MinInterior (nombres, documentos, parentesco, novedad, etc.).
+  - `Reporte`: id, cabildo_id, tipo (Censo/Altas/Bajas), novedad, generado_en, estado.
 
-## 2. Estrategia de Integración con LLM
-- **Framework**: Vercel AI SDK (o LangChain).
-- **Soporte**:
-  - Ollama (Local/Self-hosted para privacidad/costo-eficiencia).
-  - Google Gemini API (Nube para tareas de alto rendimiento).
-- **Estrategia**: Servicio de enrutamiento para decidir entre modelos según la complejidad de la tarea y la sensibilidad de los datos.
+## 2. Estrategia de Integración con LLM (Finalizado)
+- **Framework**: Vercel AI SDK.
+- **Proveedores Dinámicos**: Soporte para Google Gemini (Cloud) y Ollama (Local/Qwen3.5:9b).
+- **Resiliencia**: Sistema de Fallback automático entre proveedores.
+- **Salida Estructurada**: Uso de `generateObject` y Zod para garantizar JSONs válidos en auditorías.
+- **Chat Interactivo**: Capacidad futura de interactuar con los datos vía lenguaje natural (Markdown).
 
-## 3. Servicio de Generación de Reportes Excel
-- **Requisito**: Seguir los formatos exigidos por el Ministerio del Interior para Censo, Altas y Bajas.
+## 3. Servicio de Generación de Reportes Excel (En curso)
+- **Requisito**: Cumplimiento estricto de los formatos exigidos por el Ministerio del Interior para Censo, Altas y Bajas.
 - **Implementación**: Librería `exceljs` o `xlsx`.
-- **Flujo**:
-  1. Obtener datos filtrados de la BD.
-  2. Mapear a la estructura de la plantilla del Ministerio del Interior.
-  3. Generar y enviar `.xlsx` al cliente.
+- **Mapeo Automático**: Conversión de datos de Prisma a celdas específicas del formato oficial, incluyendo el campo oficial de `novedad`.
 
-## 4. Vistas de Frontend basadas en Roles
-- **Roles**:
-  - **Administrador**: Acceso total, gestión de usuarios, configuración avanzada y herramientas de análisis/limpieza.
-  - **Capitana**: Entrada de datos, visualización de reportes y gestión operativa específica del cabildo.
-- **Control de Acceso**: Autenticación basada en JWT con middleware de autorización por roles.
+## 4. Normas de Desarrollo (Z Policy)
+- **HTTP Client**: NO utilizar `axios`. Usar `fetch` nativo de Node.js (v18+).
+- **Convenciones**: Conventional Commits, tipado estricto en TS, y validaciones con Zod.
 
 ## 5. Fases de Desarrollo
-1. **Fase 1: Fundamentos**: Configuración del proyecto, diseño del esquema de BD, inicialización de Prisma.
-2. **Fase 2: API Core y Autenticación**: Gestión de usuarios, endpoints CRUD básicos.
-3. **Fase 3: Integración LLM**: Configuración de servicios de Ollama/Gemini.
-4. **Fase 4: Reportes**: Desarrollo del servicio de generación de reportes Excel.
-5. **Fase 5: UI Frontend e Integración de Roles**.
+1.  **Fase 1: Fundamentos (✅ Completado)**: Configuración del proyecto, diseño de BD, inicialización de Prisma.
+2.  **Fase 2: API Core y Autenticación (✅ Completado)**: Gestión de usuarios (JWT), roles (Admin/Capitana), CRUD de miembros.
+3.  **Fase 3: Integración LLM (✅ Completado)**: Motor de IA dinámico, resiliencia con fallback y auditoría de consistencia.
+4.  **Fase 4: Reportes y Chat de IA (🚀 Siguiente)**: Generación de .xlsx oficiales y servicio de chat en Markdown.
+5.  **Fase 5: UI Frontend e Integración de Roles**.
