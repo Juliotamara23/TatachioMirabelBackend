@@ -94,7 +94,7 @@ model Miembro {
   telefono          String?   // Solo números
   
   // Metadatos
-  observaciones     String?
+  novedad           String?
   activo            Boolean   @default(true)
   estado            EstadoMiembro @default(ACTIVO)
   fechaAlta         DateTime  @default(now())
